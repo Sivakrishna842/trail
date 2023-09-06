@@ -18,6 +18,8 @@ app.listen(PORT,()=>
     console.log(`Server is listening on port ${PORT}`);
 
 });
+
+
 const books=[
    
     {
@@ -1466,6 +1468,23 @@ try {
     }
   } catch (err) {
     console.error(`Something went wrong trying to find one document: ${err}\n`);
+  }
+
+  try{
+    let findResult =  await collection.find({}).toArray();
+    console.log('Found documents =>', findResult);
+    // res.send(findResult)
+    app.get("/books",(req,res)=>
+  {
+  res.send(findResult);
+  
+  
+  });
+  
+  }
+  catch(err)
+  {
+  throw err;
   }
 
   const updateDoc = { $set: { "pages": "1000" } };
